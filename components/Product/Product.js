@@ -5,10 +5,11 @@ import { resolveImage } from '~/lib/resolve-image'
 import PRODUCT_QUERY from './Product.graphql'
 import Price from '~/components/Price'
 import Button from '~/components/Button'
-import Head from 'next/head'
+import Head from 'next/head';
+import { i18n } from '../../lib/i18n'
 
 export const Product = ({ filters }) => {
-  const { loading, data } = useQuery(PRODUCT_QUERY, { variables: { filters }, fetchPolicy: 'network-only' })
+  const { loading, data } = useQuery(PRODUCT_QUERY, { variables: { filters }, context: { headers: {store: i18n.language }}, fetchPolicy: 'network-only' })
 
   const product = data?.products.items[0]
 
